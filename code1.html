@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Toán Tồn Tại</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        h1, h2, h3 {
+            margin: 10px 0;
+        }
+        #baitoantontai {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>BÀI TẬP</h1>
+    <h2>Bài toán 4 màu: Cho bản đồ gồm N quốc gia (mô tả bằng ma trận kề: 2 nước I và j là hàng xóm
+        với nhau thì Cij=1, ngược lại Cij=0). Hãy tô bằng 4 màu bản đồ sau cho 2 nước là hàng xóm
+        với nhau thì khác màu nhau?</h2>
+    <button onclick="showResult()">Kết Quả</button>
+    <div id="baitoantontai"></div>    
+    
+    <script>
+        function colorMap(adjacencyMatrix) {
+            const countryCount = adjacencyMatrix.length;
+            const colors = 4; // Số màu cần tô
+
+            const colorResult = new Array(countryCount).fill(0);
+
+            function isSafe(countryIndex, color) {
+                for (let i = 0; i < countryCount; i++) {
+                    if (adjacencyMatrix[countryIndex][i] && colorResult[i] === color) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            function colorUtil(countryIndex) {
+                if (countryIndex === countryCount) {
+                    return true;
+                }
+
+                for (let color = 1; color <= colors; color++) {
+                    if (isSafe(countryIndex, color)) {
+                        colorResult[countryIndex] = color;
+
+                        if (colorUtil(countryIndex + 1)) {
+                            return true;
+                        }
+
+                        colorResult[countryIndex] = 0;
+                    }
+                }
+
+                return false;
+            }
+
+            if (!colorUtil(0)) {
+                return "Không thể tô màu cho bản đồ với số màu đã chọn.";
+            }
+
+            return colorResult;
+        }
+
+        function showResult() {
+            const adjacencyMatrix = [
+                [0, 1, 1, 0],
+                [1, 0, 1, 1],
+                [1, 1, 0, 1],
+                [0, 1, 1, 0]
+            ];
+
+            const coloredMap = colorMap(adjacencyMatrix);
+            const resultDiv = document.getElementById("baitoantontai");
+            resultDiv.innerHTML = "<h3>Bản đồ đã được tô màu: " + coloredMap + "</h3>";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Toán Liệt Kê</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        h1, h2, h3 {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #baitoanlietke {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>BÀI TẬP</h1>
+    <h2>Liệt kê tất cả các tập hợp con của tập {1, 2, 3, 4}.</h2>
+    <button onclick="showResult()">Kết Quả</button>
+    <div id="baitoanlietke"></div>    
+    
+    <script>
+        function powerSet(nums) {
+            const result = [[]];
+            
+            for (const num of nums) {
+                const temp = [];
+                for (const subset of result) {
+                    temp.push([...subset, num]);
+                }
+                result.push(...temp);
+            }
+            
+            return result;
+        }
+        
+        function showResult() {
+            const nums = [1, 2, 3, 4];
+            const subsets = powerSet(nums);
+            const resultDiv = document.getElementById("baitoanlietke");
+            let resultHTML = "<h3>Các tập hợp con của {1, 2, 3, 4}:</h3>";
+            resultHTML += "<ul>";
+            for (const subset of subsets) {
+                resultHTML += "<li>{" + subset.join(", ") + "}</li>";
+            }
+            resultHTML += "</ul>";
+            resultDiv.innerHTML = resultHTML;
+        }
+    </script>
+</body>
+</html>

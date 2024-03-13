@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Toán Đếm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            color: #333; /* Màu chữ */
+        }
+        h1, h2, h3 {
+            margin: 10px 0;
+        }
+        #baitoandem {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hiển thị nội dung -->
+    <h1>BÀI TẬP</h1>
+    <h2> Bạn muốn mua một cặp giày từ một cửa hàng có sẵn 5 màu và 4 kích cỡ. Có bao nhiêu cách chọn?</h2>
+    <input type="submit" value="Kết Quả" onclick="baitoandem()">
+    <div id="baitoandem"></div>    
+    <!-- Xử lí thuật toán -->
+    <script>
+        function baitoandem(){
+             // Số lượng màu giày
+            const SoLuongMau = 5;
+            // Số lượng kích cỡ giày
+            const SoLuongKichCo = 4;
+            // Số cách chọn
+            const SoCachChon = SoLuongMau * SoLuongKichCo;
+            console.log("Số cách chọn một cặp giày là: " + SoCachChon);
+            let kq = document.getElementById("baitoandem")
+            kq.innerHTML=" Số cách chọn một cặp giày là : " +SoCachChon
+        }
+    </script>
+</body>
+</html>
